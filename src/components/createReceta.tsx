@@ -1,6 +1,5 @@
 import jsPDF from "jspdf";
 import { IRecetaPaciente } from "../utils/interfaces/IRecetaPaciente";
-import backgroundRecetaComponent from "./backgroundReceta";
 
 type Props = {
   receta: IRecetaPaciente;
@@ -8,12 +7,16 @@ type Props = {
 
 const createReceta = (props: Props) => {
   const { receta } = props;
-  const doc = new jsPDF();
+  const doc = new jsPDF({
+    orientation: "p",
+    unit: "mm",
+    format: "letter",
+  });
 
   const arraytoPrint = (tratamientos: Array<string>) => {
     let tratamientoString: string = "";
-    tratamientos.forEach((tratamiento: string) => {
-      tratamientoString += tratamiento + "\n";
+    tratamientos.forEach((tratamiento: string, index: number) => {
+      tratamientoString += `${index + 1}. ${tratamiento} \n`;
     });
     return tratamientoString;
   };
@@ -30,39 +33,35 @@ const createReceta = (props: Props) => {
     return tratamientoString;
   };
 
-  doc.addImage("images/backgroundReceta.jpg", "JPG", 0, 0, 210, 148.5);
+  doc.addImage("images/backgroundReceta.jpg", "JPG", 0, 5, 216, 148.5);
 
-  doc.setFontSize(8);
+  doc.setFontSize(12);
   doc.setFont("arial");
-  doc.text(receta.direccion, 27, 39, { align: "left" });
+  doc.text(receta.direccion, 37, 44, { align: "left" });
 
   doc.setFontSize(10);
   doc.setFont("arial");
-  doc.text(receta.fecha, 172, 29, { align: "left" });
+  doc.text(receta.fecha, 183, 34, { align: "left" });
 
   doc.setFontSize(12);
   doc.setFont("arial");
-  doc.text(arraytoPrintPerComa(receta.medicamentos), 153, 39, {
+  doc.text(receta.nombre, 31, 39, { align: "left" });
+  doc.text(receta.edad.toString() + " años", 135, 39, { align: "left" });
+  doc.text(receta.telefono, 175, 39, { align: "left" });
+
+  doc.text(receta.peso, 23.5, 59.8, { align: "left" });
+  doc.text(receta.talla, 24, 66.5, { align: "left" });
+  doc.text(receta.temperatura + "°", 15.5, 73, { align: "left" });
+  doc.text(receta.ta, 18, 78.7, { align: "left" });
+  doc.text(receta.fc, 18, 84.6, { align: "left" });
+  doc.text(receta.fr, 19, 91.5, { align: "left" });
+  doc.text(receta.so2, 22, 98, { align: "left" });
+  doc.text(arraytoPrintPerComa(receta.medicamentos), 87, 49, {
     align: "left",
   });
+  doc.text(arraytoPrint(receta.tratamientos), 35, 70, { align: "left" });
+  doc.text(receta.recomendaciones, 13, 125, { align: "left" });
 
-  doc.setFontSize(14);
-  doc.setFont("arial");
-  doc.text(arraytoPrint(receta.tratamientos), 30, 57, { align: "left" });
-
-  doc.setFontSize(12);
-  doc.setFont("arial", "bold");
-  doc.text(receta.nombre, 23.5, 34, { align: "left" });
-  doc.text(receta.edad.toString() + " años", 115, 34, { align: "left" });
-  doc.text(receta.telefono, 147, 34, { align: "left" });
-
-  doc.text(receta.peso, 16, 50, { align: "left" });
-  doc.text(receta.talla, 16, 55, { align: "left" });
-  doc.text(receta.temperatura, 13, 60, { align: "left" });
-  doc.text(receta.ta, 15, 65, { align: "left" });
-  doc.text(receta.fc, 15, 70, { align: "left" });
-  doc.text(receta.fr, 15, 75, { align: "left" });
-  doc.text(receta.so2, 17, 80, { align: "left" });
 
   doc.save(`${receta.nombre}_receta.pdf`);
 };

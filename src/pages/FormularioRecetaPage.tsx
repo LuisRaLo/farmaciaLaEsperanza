@@ -21,6 +21,7 @@ const FormularioRecetaPage = () => {
     so2: "",
     tratamientos: [],
     fecha: DateHelpers.getCurrentDateStringLarge(),
+    recomendaciones: "",
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,10 +39,10 @@ const FormularioRecetaPage = () => {
     if (input.value) {
       setReceta({
         ...receta,
-        medicamentos: [...receta.medicamentos, (input.value).toUpperCase()],
+        medicamentos: [...receta.medicamentos, input.value.toUpperCase()],
       });
-      li.classList.add("list-group-item");
-      li.appendChild(document.createTextNode((input.value).toUpperCase()));
+      li.classList.add("list-group-item", "bg-light");
+      li.appendChild(document.createTextNode(input.value.toUpperCase()));
       ul.appendChild(li);
       input.value = "";
       input.focus();
@@ -60,11 +61,16 @@ const FormularioRecetaPage = () => {
     if (tratamientoText.value) {
       setReceta({
         ...receta,
-        tratamientos: [...receta.tratamientos, (tratamientoText.value).toUpperCase()],
+        tratamientos: [
+          ...receta.tratamientos,
+          tratamientoText.value.toUpperCase(),
+        ],
       });
 
-      li.classList.add("list-group-item");
-      li.appendChild(document.createTextNode((tratamientoText.value).toUpperCase()));
+      li.classList.add("list-group-item", "bg-light");
+      li.appendChild(
+        document.createTextNode(tratamientoText.value.toUpperCase())
+      );
       tratamientosList.appendChild(li);
       tratamientoText.value = "";
       tratamientoText.focus();
@@ -298,6 +304,7 @@ const FormularioRecetaPage = () => {
               <div className="input-group mb-3">
                 <input
                   id="addTratamiento"
+                  name="tratamiento"
                   type="text"
                   className="form-control"
                   placeholder="Nombre del medicamento"
@@ -322,7 +329,34 @@ const FormularioRecetaPage = () => {
           </Row>
 
           <Row>
+            <Col className="col-12">
+              <Form.Group className="mb-3">
+                <Form.Label>Indicaciones generales</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={5}
+                  placeholder="Recomendaciones generales"
+                  id="recomendaciones"
+                  name="recomendaciones"
+                  value={receta.recomendaciones}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+
+          <Row>
             <Col className="col-12 text-center mb-4 mt-4">
+              <Button
+                variant="danger"
+                onClick={() => {
+                  window.location.href = "/";
+                }}
+                className="m-3"
+              >
+                Ir al inicio
+              </Button>
+
               <Button variant="primary" type="submit">
                 Generar receta
               </Button>

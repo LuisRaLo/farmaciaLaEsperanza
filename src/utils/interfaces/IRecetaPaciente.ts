@@ -13,4 +13,5 @@ export interface IRecetaPaciente {
   so2: string;
   tratamientos: Array<string>;
   fecha: string;
+  recomendaciones: string;
 }
