@@ -1,58 +1,371 @@
 import React from "react";
+import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import ThemeProvider from "react-bootstrap/ThemeProvider";
+import createReceta from "../components/createReceta";
+import DateHelpers from "../utils/helpers/DateHelpers";
+import { IRecetaPaciente } from "../utils/interfaces/IRecetaPaciente";
 
 const FormularioRecetaPage = () => {
+  const [receta, setReceta] = React.useState<IRecetaPaciente>({
+    nombre: "",
+    telefono: "",
+    direccion: "",
+    medicamentos: [],
+    edad: 0,
+    peso: "",
+    talla: "",
+    temperatura: "",
+    ta: "",
+    fc: "",
+    fr: "",
+    so2: "",
+    tratamientos: [],
+    fecha: DateHelpers.getCurrentDateStringLarge(),
+  });
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setReceta({ ...receta, [name]: value });
+  };
+
+  const agregarMedicamento = (event: any) => {
+    event.preventDefault();
+
+    let input: any = document.getElementById("userinput");
+    let ul: any = document.getElementById("medicamentos");
+    let li: any = document.createElement("li");
+
+    if (input.value) {
+      setReceta({
+        ...receta,
+        medicamentos: [...receta.medicamentos, input.value],
+      });
+      li.classList.add("list-group-item");
+      li.appendChild(document.createTextNode(input.value));
+      ul.appendChild(li);
+      input.value = "";
+      input.focus();
+    }
+
+    return false;
+  };
+
+  const agregarTratamiento = (event: any) => {
+    event.preventDefault();
+
+    const tratamientoText: any = document.getElementById("addTratamiento");
+    const tratamientosList: any = document.getElementById("tratamientos");
+    const li: any = document.createElement("li");
+
+    if (tratamientoText.value) {
+      setReceta({
+        ...receta,
+        tratamientos: [...receta.tratamientos, tratamientoText.value],
+      });
+
+      li.classList.add("list-group-item");
+      li.appendChild(document.createTextNode(tratamientoText.value));
+      tratamientosList.appendChild(li);
+      tratamientoText.value = "";
+      tratamientoText.focus();
+    }
+
+    return false;
+  };
+
   const generarReceta = (event: any) => {
     event.preventDefault();
 
-    console.log("Generando receta");
+    createReceta({ receta: receta });
   };
 
   return (
-    <div className="container p-4">
-      <div className="row text-center">
-        <div className="col-12">
-          <div className="h1">Formulario de receta</div>
-        </div>
+    <ThemeProvider
+      breakpoints={["xxxl", "xxl", "xl", "lg", "md", "sm", "xs", "xxs"]}
+    >
+      <Row>
+        <Col xs={12} className="text-center" style={styles.titleContainer}>
+          <p style={styles.titleText}>
+            <strong>Farmacia la "Esperanza"</strong>
+          </p>
+          <p style={styles.textInformativo}>
+            {DateHelpers.getCurrentDateStringLarge()}
+          </p>
+        </Col>
+      </Row>
 
-        {/* formulario */}
-        <form style={styles.formulario}>
-          <div className="form-group">
-            <label htmlFor="exampleFormControlInput1">
-              Nombre del paciente
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="exampleFormControlInput1"
-              placeholder="Nombre del paciente"
-            />
-          </div>
+      <Container>
+        <Form id="formulario-receta" onSubmit={generarReceta}>
+          <Row>
+            <Col>
+              <Form.Group className="mb-3">
+                <Form.Label>Nombre del paciente</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Nombre del paciente"
+                  id="pacienteName"
+                  name="nombre"
+                  value={receta.nombre}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+            </Col>
 
-          <div className="form-group">
-            <label htmlFor="exampleFormControlInput1">Nombre del médico</label>
-            <input
-              type="text"
-              className="form-control"
-              id="exampleFormControlInput1"
-              placeholder="Nombre del médico"
-            />
-          </div>
+            <Col className="col-sm-1">
+              <Form.Group className="mb-3">
+                <Form.Label>Edad</Form.Label>
+                <Form.Control
+                  type="number"
+                  placeholder="Edad"
+                  min={0}
+                  max={99}
+                  id="pacienteEdad"
+                  name="edad"
+                  value={receta.edad}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+            </Col>
 
-          <button className="btn btn-primary mt-4" onClick={generarReceta}>
-            Enviar
-          </button>
-        </form>
-      </div>
-    </div>
+            <Col className="col-sm-4">
+              <Form.Group className="mb-3">
+                <Form.Label>Teléfono</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Teléfono"
+                  min={0}
+                  max={99}
+                  id="pacienteTelefono"
+                  name="telefono"
+                  value={receta.telefono}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col>
+              <Form.Group className="mb-3">
+                <Form.Label>Dirección</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Dirección"
+                  id="pacienteName"
+                  name="direccion"
+                  value={receta.direccion}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+
+          <Row>
+            <div className="col-12">
+              <header>
+                <p>Medicamentos a los que es alergico</p>
+              </header>
+              <div className="input-group mb-3">
+                <input
+                  id="userinput"
+                  type="text"
+                  className="form-control"
+                  placeholder="Nombre del medicamento"
+                  aria-label="Agregar medicamento"
+                  aria-describedby="basic-addon2"
+                />
+                <div className="input-group-append">
+                  <button
+                    className="btn btn-outline-info"
+                    id="enter"
+                    type="button"
+                    onClick={agregarMedicamento}
+                  >
+                    Agregar
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className="col-12">
+              <ul className="list-group" id="medicamentos"></ul>
+            </div>
+          </Row>
+
+          <Row>
+            <Col className="col-2">
+              <Form.Group className="mb-3">
+                <Form.Label>Peso</Form.Label>
+                <Form.Control
+                  type="number"
+                  placeholder="Peso"
+                  id="pacienteName"
+                  name="peso"
+                  value={receta.peso}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+            </Col>
+
+            <Col className="col-3">
+              <Form.Group className="mb-3">
+                <Form.Label>Talla</Form.Label>
+                <Form.Control
+                  type="number"
+                  placeholder="Peso"
+                  id="Talla"
+                  name="talla"
+                  value={receta.talla}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+            </Col>
+
+            <Col className="col-2">
+              <Form.Group className="mb-3">
+                <Form.Label>Temperatura</Form.Label>
+                <Form.Control
+                  type="number"
+                  placeholder="Temperatura"
+                  id="pacienteName"
+                  name="temperatura"
+                  value={receta.temperatura}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+            </Col>
+
+            <Col className="col-2">
+              <Form.Group className="mb-3">
+                <Form.Label>T/A</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="T/A"
+                  id="pacienteName"
+                  name="ta"
+                  value={receta.ta}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+            </Col>
+
+            <Col className="col-1">
+              <Form.Group className="mb-3">
+                <Form.Label>F/C</Form.Label>
+                <Form.Control
+                  type="number"
+                  placeholder="F/C"
+                  id="pacienteName"
+                  name="fc"
+                  value={receta.fc}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+            </Col>
+
+            <Col className="col-1">
+              <Form.Group className="mb-3">
+                <Form.Label>F/R</Form.Label>
+                <Form.Control
+                  type="number"
+                  placeholder="F/R"
+                  id="pacienteName"
+                  name="fr"
+                  value={receta.fr}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+            </Col>
+
+            <Col className="col-1">
+              <Form.Group className="mb-3">
+                <Form.Label>SPO2</Form.Label>
+                <Form.Control
+                  type="number"
+                  placeholder="SPO2"
+                  id="pacienteName"
+                  name="spo2"
+                  value={receta.so2}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+
+          <Row>
+            <div className="col-12">
+              <header>
+                <p>Medicamentos a los que es alergico</p>
+              </header>
+              <div className="input-group mb-3">
+                <input
+                  id="addTratamiento"
+                  type="text"
+                  className="form-control"
+                  placeholder="Nombre del medicamento"
+                  aria-label="Agregar medicamento"
+                  aria-describedby="basic-addon2"
+                />
+                <div className="input-group-append">
+                  <button
+                    className="btn btn-outline-info"
+                    id="enter"
+                    type="button"
+                    onClick={agregarTratamiento}
+                  >
+                    Agregar
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className="col-12">
+              <ul className="list-group" id="tratamientos"></ul>
+            </div>
+          </Row>
+
+          <Row>
+            <Col className="col-12 text-center mb-4 mt-4">
+              <Button variant="primary" type="submit">
+                Generar receta
+              </Button>
+            </Col>
+          </Row>
+        </Form>
+      </Container>
+    </ThemeProvider>
   );
 };
 
 const { width, height } = window.screen;
 
 const styles = {
+  titleContainer: {
+    width: width,
+    margin: "auto",
+    marginBottom: "2rem",
+    backgroundColor: "rgba(0, 111, 201, 1)",
+    color: "white",
+  },
+  titleText: {
+    fontSize: "3rem",
+    fontWeight: "300",
+  },
+  subtitleText: {
+    fontSize: "1.5rem",
+    fontWeight: "350",
+  },
+  text: {
+    fontSize: "1.5rem",
+    fontWeight: "350",
+  },
+  textInformativo: {
+    fontSize: "1rem",
+    fontWeight: "350",
+  },
+
   formulario: {
     width: width * 0.8,
     padding: "2rem",
+    margin: "auto",
 
     elevation: "1",
     borderRadius: "1rem",
