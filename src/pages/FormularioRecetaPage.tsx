@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import { Form, Button, Container, Row, Col, Alert } from "react-bootstrap";
 import ThemeProvider from "react-bootstrap/ThemeProvider";
 import createReceta from "../components/createReceta";
 import DateHelpers from "../utils/helpers/DateHelpers";
@@ -11,7 +11,7 @@ const FormularioRecetaPage = () => {
     telefono: "",
     direccion: "",
     medicamentos: [],
-    edad: 0,
+    edad: NaN,
     peso: "",
     talla: "",
     temperatura: "",
@@ -25,7 +25,7 @@ const FormularioRecetaPage = () => {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setReceta({ ...receta, [name]: value });
+    setReceta({ ...receta, [name]: value.toUpperCase() });
   };
 
   const agregarMedicamento = (event: any) => {
@@ -38,10 +38,10 @@ const FormularioRecetaPage = () => {
     if (input.value) {
       setReceta({
         ...receta,
-        medicamentos: [...receta.medicamentos, input.value],
+        medicamentos: [...receta.medicamentos, (input.value).toUpperCase()],
       });
       li.classList.add("list-group-item");
-      li.appendChild(document.createTextNode(input.value));
+      li.appendChild(document.createTextNode((input.value).toUpperCase()));
       ul.appendChild(li);
       input.value = "";
       input.focus();
@@ -60,11 +60,11 @@ const FormularioRecetaPage = () => {
     if (tratamientoText.value) {
       setReceta({
         ...receta,
-        tratamientos: [...receta.tratamientos, tratamientoText.value],
+        tratamientos: [...receta.tratamientos, (tratamientoText.value).toUpperCase()],
       });
 
       li.classList.add("list-group-item");
-      li.appendChild(document.createTextNode(tratamientoText.value));
+      li.appendChild(document.createTextNode((tratamientoText.value).toUpperCase()));
       tratamientosList.appendChild(li);
       tratamientoText.value = "";
       tratamientoText.focus();
@@ -75,24 +75,23 @@ const FormularioRecetaPage = () => {
 
   const generarReceta = (event: any) => {
     event.preventDefault();
-
     createReceta({ receta: receta });
+
+    return alert("Receta generada con éxito");
   };
 
   return (
     <ThemeProvider
       breakpoints={["xxxl", "xxl", "xl", "lg", "md", "sm", "xs", "xxs"]}
     >
-      <Row>
-        <Col xs={12} className="text-center" style={styles.titleContainer}>
-          <p style={styles.titleText}>
-            <strong>Farmacia la "Esperanza"</strong>
-          </p>
-          <p style={styles.textInformativo}>
-            {DateHelpers.getCurrentDateStringLarge()}
-          </p>
-        </Col>
-      </Row>
+      <div className="text-center" style={styles.titleContainer}>
+        <p style={styles.titleText}>
+          <strong>Farmacia "La Esperanza"</strong>
+        </p>
+        <p style={styles.textInformativo}>
+          {DateHelpers.getCurrentDateStringLarge()}
+        </p>
+      </div>
 
       <Container>
         <Form id="formulario-receta" onSubmit={generarReceta}>
@@ -283,7 +282,7 @@ const FormularioRecetaPage = () => {
                   type="number"
                   placeholder="SPO2"
                   id="pacienteName"
-                  name="spo2"
+                  name="so2"
                   value={receta.so2}
                   onChange={handleChange}
                 />
@@ -339,9 +338,9 @@ const { width, height } = window.screen;
 
 const styles = {
   titleContainer: {
-    width: width,
     margin: "auto",
-    marginBottom: "2rem",
+    padding: "10px",
+    marginBottom: "3rem",
     backgroundColor: "rgba(0, 111, 201, 1)",
     color: "white",
   },
