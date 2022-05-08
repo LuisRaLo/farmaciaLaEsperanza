@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Button, Container, Row, Col, Alert } from "react-bootstrap";
+import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import ThemeProvider from "react-bootstrap/ThemeProvider";
 import createReceta from "../components/createReceta";
 import DateHelpers from "../utils/helpers/DateHelpers";

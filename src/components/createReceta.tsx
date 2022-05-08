@@ -1,4 +1,5 @@
 import jsPDF from "jspdf";
+import pacienteAddHook from "../hooks/pacienteAddHook";
 import { IRecetaPaciente } from "../utils/interfaces/IRecetaPaciente";
 
 type Props = {
@@ -7,6 +8,9 @@ type Props = {
 
 const createReceta = (props: Props) => {
   const { receta } = props;
+
+  //pacienteAddHook(receta);
+
   const doc = new jsPDF({
     orientation: "p",
     unit: "mm",
@@ -33,7 +37,7 @@ const createReceta = (props: Props) => {
     return tratamientoString;
   };
 
-  doc.addImage("images/backgroundReceta.jpg", "JPG", 0, 5, 216, 148.5);
+  doc.addImage("assets/images/backgroundReceta.jpg", "JPG", 0, 5, 216, 148.5);
 
   doc.setFontSize(12);
   doc.setFont("arial");
@@ -61,7 +65,6 @@ const createReceta = (props: Props) => {
   });
   doc.text(arraytoPrint(receta.tratamientos), 35, 70, { align: "left" });
   doc.text(receta.recomendaciones, 13, 125, { align: "left" });
-
 
   doc.save(`${receta.nombre}_receta.pdf`);
 };
