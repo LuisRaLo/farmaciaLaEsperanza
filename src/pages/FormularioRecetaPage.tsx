@@ -2,6 +2,7 @@ import React from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import ThemeProvider from "react-bootstrap/ThemeProvider";
 import createReceta from "../components/createReceta";
+import colorConstants from "../utils/constants/colors";
 import DateHelpers from "../utils/helpers/DateHelpers";
 import { IRecetaPaciente } from "../utils/interfaces/IRecetaPaciente";
 
@@ -299,7 +300,7 @@ const FormularioRecetaPage = () => {
           <Row>
             <div className="col-12">
               <header>
-                <p>Medicamentos a los que es alergico</p>
+                <p>Tratamiento (separar por comas)</p>
               </header>
               <div className="input-group mb-3">
                 <input
@@ -375,7 +376,7 @@ const styles = {
     margin: "auto",
     padding: "10px",
     marginBottom: "3rem",
-    backgroundColor: "rgba(0, 111, 201, 1)",
+    backgroundColor: colorConstants.ligth.verdeEsperanza,
     color: "white",
   },
   titleText: {

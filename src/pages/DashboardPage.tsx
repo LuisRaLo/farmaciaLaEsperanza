@@ -1,8 +1,11 @@
 import React from "react";
 import { Image } from "react-bootstrap";
 import Lottie from "react-lottie";
-import animation1 from "../utils/lotties/94255-sign-up.json";
+import animation1 from "../utils/lotties/93561-customer-service.json";
 import animation2 from "../utils/lotties/101372-healthcare-animation.json";
+import animation3 from "../utils/lotties/101103-hematology.json";
+import animation4 from "../utils/lotties/81900-medicaments.json";
+
 import colorConstants from "../utils/constants/colors";
 
 export default function DashboardPage() {
@@ -24,75 +27,166 @@ export default function DashboardPage() {
     },
   };
 
+  const lottie3Options = {
+    loop: true,
+    autoplay: true,
+    animationData: animation3,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
+
+  const lottie4Options = {
+    loop: true,
+    autoplay: true,
+    animationData: animation4,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
+
   return (
-    <div className="container mt-4">
+    <div className="container mt-4 mb-5">
       <div className="row text-center">
         <div className="col-12 text-center">
           <Image src={"assets/images/Logo.png"} style={styles.logo} />
         </div>
 
-        <div className="col-6">
+        <div className="col-3 mb-5">
           <div className="card" style={styles.myCard}>
             <div className="card-body">
               <div className="card-title mb-4" style={styles.titulos}>
-                Afiliaciones
+                Socios
               </div>
               <Lottie options={lottie1Options} height={200} width={200} />
-              <p className="card-text  mt-4 mb-4">
-                Aqui puedes ver todas las afiliaciones que hay en la farmacia
+              <p className="card-text mt-1 mb-4">
+                En este apartado podrás ver todos los socios que hay en la base
+                de datos.
               </p>
-              <a
-                href="/formulario-receta"
-                className="btn btn-lg btn-primary"
+              <button
+                id="btnGroupDrop1"
+                type="button"
+                className="col-12 btn btn-lg btn-primary mb-1"
                 style={styles.btnColor}
               >
-                Continuar
-              </a>
+                Alta de socios
+              </button>
+
+              <button
+                id="btnGroupDrop1"
+                type="button"
+                className="col-12 btn btn-lg btn-primary "
+                style={styles.btnColor}
+              >
+                Consulta de socios
+              </button>
             </div>
           </div>
         </div>
 
-        <div className="col-6">
+        <div className="col-3 mb-5">
           <div className="card" style={styles.myCard}>
             <div className="card-body">
               <div className="card-title mb-4" style={styles.titulos}>
-                Consulta Médica
+                Servicios
               </div>
               <Lottie options={lottie2Options} height={200} width={200} />
-              <p className="card-text mt-4 mb-4">
-                En este apartado podrás surtir una consulta médica.
+
+              <p className="card-text mb-5 mt-4">
+                En este apartado podrás ver todos los servicios que hay en la
+                base de datos.
               </p>
 
-              <div className="btn-group" role="group">
+              <div className="btn-group dropend col-12 mb-1">
                 <button
-                  id="btnGroupDrop1"
                   type="button"
-                  className="btn  btn-lg dropdown-toggle"
+                  className="btn btn-lg dropdown-toggle"
                   data-bs-toggle="dropdown"
+                  aria-expanded="false"
                   style={styles.btnColor}
                 >
-                  Consulta médica a:
+                  Médico
                 </button>
-                <ul
-                  className="dropdown-menu text-center"
-                  aria-labelledby="btnGroupDrop1"
-                >
+                <ul className="dropdown-menu">
                   <li>
-                    <a href="" className="btn btn-outline-primary">
-                      Afiliados
+                    <a href="" className="btn btn-outline-secondary col-12 mb-2 ">
+                      Consulta a Afiliados
                     </a>
                   </li>
-                  <br />
                   <li>
                     <a
                       href="/formulario-receta"
-                      className="btn btn-outline-secondary"
+                      className="btn btn-outline-secondary col-12 mb-2"
                     >
-                      No Afiliados
+                      Consulta a No Afiliados
+                    </a>
+                  </li>
+
+                  <li>
+                    <a
+                      href="/formulario-receta"
+                      className="btn btn-outline-secondary col-12 mb-2"
+                    >
+                      Certificado Médico
                     </a>
                   </li>
                 </ul>
               </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="col-3 mb-5">
+          <div className="card" style={styles.myCard}>
+            <div className="card-body">
+              <div className="card-title mb-4" style={styles.titulos}>
+                Laboratorio Clínico
+              </div>
+              <Lottie options={lottie3Options} height={200} width={200} />
+              <p className="card-text  mt-4 mb-4">
+                Aqui puedes ver todas las afiliaciones que hay en la farmacia
+              </p>
+
+              <div className="btn-group dropend col-12 mb-1">
+                <button
+                  type="button"
+                  className="btn btn-lg"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  style={styles.btnColor}
+                >
+                  Cotización
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="col-3 mb-5">
+          <div className="card" style={styles.myCard}>
+            <div className="card-body">
+              <div className="card-title mb-4" style={styles.titulos}>
+                Farmacia
+              </div>
+              <Lottie options={lottie4Options} height={200} width={200} />
+              <p className="card-text mb-4 mt-3">
+                Selecciona el sistema que deseas utilizar:
+              </p>
+              <a
+                href="/formulario-receta"
+                className="btn btn-lg btn-primary col-12 mb-2"
+                style={styles.btnColor}
+              >
+                Punto de venta
+              </a>
+
+              <a
+                href="/formulario-receta"
+                className="btn btn-lg btn-primary col-12 mb-2"
+                style={styles.btnColor}
+              >
+                Consultar medicamentos
+              </a>
             </div>
           </div>
         </div>
