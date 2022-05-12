@@ -1,12 +1,10 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import C404Page from "./pages/Codes/C404Page";
+import AltasScreen from "./pages/Customers/AltasScreen";
+import MenuCustomersPage from "./pages/Customers/MenuCustomersPage";
 import DashboardPage from "./pages/Home/DashboardPage";
-
-import CustomerNavigation from "./routes/customers.routes";
-import FarmaciaNavigation from "./routes/farmacia.routes";
-import LaboratoryNavigation from "./routes/laboratory.routes";
-import ServicesNavigation from "./routes/services.routes";
+import MenuServicesPage from "./pages/Services/MenuServicesPage";
 
 const App: React.FC = () => {
   return (
@@ -15,16 +13,17 @@ const App: React.FC = () => {
         <Route path="/" element={<DashboardPage />} />
 
         {/* CUSTOMERS */}
-        <Route path="/customers" element={<CustomerNavigation />} />
+        <Route path="/customers" element={<MenuCustomersPage />} />
+        <Route path="/customers/socios" element={<AltasScreen />} />
 
         {/* SERVICES */}
-        <Route path="/services" element={<ServicesNavigation />} />
+        <Route path="/services" element={<MenuServicesPage />} />
 
         {/* PHARMACY */}
-        <Route path="/pharmacy" element={<FarmaciaNavigation />} />
+        <Route path="/pharmacy" element={<MenuServicesPage />} />
 
         {/* LABORATORIES */}
-        <Route path="/laboratory" element={<LaboratoryNavigation />} />
+        <Route path="/laboratory" element={<MenuServicesPage />} />
 
         <Route path="*" element={<C404Page />} />
       </Routes>
