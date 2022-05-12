@@ -1,10 +1,10 @@
 import React from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import ThemeProvider from "react-bootstrap/ThemeProvider";
-import createReceta from "../components/createReceta";
-import colorConstants from "../utils/constants/colors";
-import DateHelpers from "../utils/helpers/DateHelpers";
-import { IRecetaPaciente } from "../utils/interfaces/IRecetaPaciente";
+import createReceta from "../../../components/createReceta";
+import colorConstants from "../../../utils/constants/colors";
+import DateHelpers from "../../../utils/helpers/DateHelpers";
+import { IRecetaPaciente } from "../../../utils/interfaces/IRecetaPaciente";
 
 const FormularioRecetaPage = () => {
   const [receta, setReceta] = React.useState<IRecetaPaciente>({
