@@ -12,7 +12,7 @@ const FormularioRecetaPage = () => {
     telefono: "",
     direccion: "",
     medicamentos: [],
-    edad: NaN,
+    edad: 0,
     peso: "",
     talla: "",
     temperatura: "",

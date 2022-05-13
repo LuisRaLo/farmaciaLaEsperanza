@@ -5,6 +5,7 @@ import AltasScreen from "./pages/Customers/AltasScreen";
 import MenuCustomersPage from "./pages/Customers/MenuCustomersPage";
 import DashboardPage from "./pages/Home/DashboardPage";
 import CotizacionPage from "./pages/Laboratory/CotizacionPage";
+import FormularioRecetaPage from "./pages/Services/Medico/FormularioRecetaPage";
 import MenuServicesPage from "./pages/Services/MenuServicesPage";
 
 const App: React.FC = () => {
@@ -19,6 +20,8 @@ const App: React.FC = () => {
 
         {/* SERVICES */}
         <Route path="/services" element={<MenuServicesPage />} />
+        <Route path="/services/medico/consulta-medica" element={<FormularioRecetaPage />} />
+        
 
         {/* PHARMACY */}
         <Route path="/pharmacy" element={<MenuServicesPage />} />

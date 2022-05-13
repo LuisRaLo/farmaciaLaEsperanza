@@ -37,7 +37,7 @@ const createReceta = (props: Props) => {
     return tratamientoString;
   };
 
-  doc.addImage("assets/images/backgroundReceta.jpg", "JPG", 0, 5, 216, 148.5);
+  doc.addImage("/../../assets/images/backgroundReceta.jpg", "JPG", 0, 5, 216, 148.5);
 
   doc.setFontSize(12);
   doc.setFont("arial");
