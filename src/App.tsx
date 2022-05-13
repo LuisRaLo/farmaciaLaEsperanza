@@ -4,6 +4,7 @@ import C404Page from "./pages/Codes/C404Page";
 import AltasScreen from "./pages/Customers/AltasScreen";
 import MenuCustomersPage from "./pages/Customers/MenuCustomersPage";
 import DashboardPage from "./pages/Home/DashboardPage";
+import CotizacionPage from "./pages/Laboratory/CotizacionPage";
 import MenuServicesPage from "./pages/Services/MenuServicesPage";
 
 const App: React.FC = () => {
@@ -23,7 +24,7 @@ const App: React.FC = () => {
         <Route path="/pharmacy" element={<MenuServicesPage />} />
 
         {/* LABORATORIES */}
-        <Route path="/laboratory" element={<MenuServicesPage />} />
+        <Route path="/laboratory" element={<CotizacionPage />} />
 
         <Route path="*" element={<C404Page />} />
       </Routes>
