@@ -86,10 +86,6 @@ export default function CotizacionPage() {
                       <p>
                         <b>Precio Venta:</b> $ {result.precioVenta}
                       </p>
-
-                      <p>
-                        <b>Precio Compra:</b> $ {result.precioCompra}
-                      </p>
                     </div>
                   </div>
                 ))}

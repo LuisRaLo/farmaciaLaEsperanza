@@ -13,7 +13,7 @@ export default function MenuServicesPage() {
       <Col>
         <Row sm={12} className="text-center mt-5">
           <Button variant="primary" href="/services/medico/consulta-medica">
-            Cotizacion
+            Consulta Médica
           </Button>
         </Row>
       </Col>
