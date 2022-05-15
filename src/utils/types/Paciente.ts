@@ -22,19 +22,6 @@ export type THitorialClinico = {
   diagnostico: TDiagnostico[] | null;
 };
 
-export type TSignosVitales = {
-  temperatura: number | null;
-  peso: number | null;
-  talla: number | null;
-  tensionArterial: {
-    sistolica: number | null;
-    diastolica: number | null;
-  } | null;
-  frecuenciaCardiaca: number | null;
-  frecuenciaRespiratoria: number | null;
-  saturacionOxigeno: number | null;
-};
-
 type TDiagnostico = {
   fechaDiagnostico: string;
   signosVitales: TSignosVitales | null;
@@ -47,6 +34,20 @@ type TDiagnostico = {
   diagnosticoEnfermedad: string;
   tratamiento: TTratamiento[] | TTratamiento;
   indicacionesGenerales: string;
+};
+
+
+export type TSignosVitales = {
+  temperatura: number | null;
+  peso: number | null;
+  talla: number | null;
+  tensionArterial: {
+    sistolica: number | null;
+    diastolica: number | null;
+  } | null;
+  frecuenciaCardiaca: number | null;
+  frecuenciaRespiratoria: number | null;
+  saturacionOxigeno: number | null;
 };
 
 type TTratamiento = {

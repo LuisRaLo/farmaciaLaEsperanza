@@ -1,8 +1,20 @@
+import { ITratamiento } from "./Paciente/ITratamiento";
+
 export interface IRecetaPaciente {
   nombre: string;
+  apellidoPaterno: "",
+  apellidoMaterno: "",
   telefono: string;
-  direccion: string;
-  medicamentos: Array<string>;
+  direccion: {
+    calle: "",
+    MzoNi: "",
+    LtoNe: "",
+    colonia: "",
+    codigoPostal: "",
+    municipio: "",
+    estado: "",
+  },
+  medicamentosAlergia: Array<string>;
   edad: number;
   peso: string;
   talla: string;
@@ -11,7 +23,7 @@ export interface IRecetaPaciente {
   fc: string;
   fr: string;
   so2: string;
-  tratamientos: Array<string>;
+  tratamientos: Array<ITratamiento>;
   fecha: string;
   recomendaciones: string;
 }

@@ -4,7 +4,7 @@ import { StringsHelper } from "../utils/helpers/StringsHelper";
 import { IRecetaPaciente } from "../utils/interfaces/IRecetaPaciente";
 import { THitorialClinico, TPaciente } from "../utils/types/Paciente";
 
-const pacienteAddHook = async (paciente: IRecetaPaciente): Promise<void> => {
+const pacienteAddHook = async (paciente: any): Promise<void> => {
   const userId = StringsHelper.uniqueId();
 
   const historialClinico: THitorialClinico = {
