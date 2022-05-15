@@ -32,7 +32,7 @@ const createReceta = (props: Props) => {
     tratamientos.forEach((tratamiento: ITratamiento, index: number) => {
       tratamientoString += `${index + 1}. ${tratamiento.medicamento} ${
         tratamiento.dosis
-      } ${tratamiento.frecuencia} ${tratamiento.duracion} \n`;
+      } ${tratamiento.frecuencia} ${tratamiento.duracion} ${tratamiento.observaciones} \n`;
     });
     return tratamientoString;
   };
