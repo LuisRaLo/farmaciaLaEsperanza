@@ -1,6 +1,6 @@
 export type TPaciente = {
   data: {
-    curp: string;
+    
     nombre: string;
     apellidoPaterno: string;
     apellidoMaterno: string;

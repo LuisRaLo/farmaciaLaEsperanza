@@ -1,7 +1,6 @@
 import { addPaciente } from "../services/firebase";
 import DateHelpers from "../utils/helpers/DateHelpers";
 import { StringsHelper } from "../utils/helpers/StringsHelper";
-import { IRecetaPaciente } from "../utils/interfaces/IRecetaPaciente";
 import { THitorialClinico, TPaciente } from "../utils/types/Paciente";
 
 const pacienteAddHook = async (paciente: any): Promise<void> => {
@@ -46,7 +45,6 @@ const pacienteAddHook = async (paciente: any): Promise<void> => {
 
   const pacienteToAdd: TPaciente = {
     data: {
-      curp: "",
       nombre: paciente.nombre,
       apellidoPaterno: "",
       apellidoMaterno: "",

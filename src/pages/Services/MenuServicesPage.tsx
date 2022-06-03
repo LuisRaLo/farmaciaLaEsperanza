@@ -12,12 +12,23 @@ import {
 import { Col, Container, Row } from "react-bootstrap";
 
 import animation1 from "../../utils/lotties/100854-doctor-prescription.json";
+import animation2 from "../../utils/lotties/82910-psychotherapy.json";
 import Lottie from "react-lottie";
+
 export default function MenuServicesPage() {
   const lottie1Options = {
     loop: true,
     autoplay: true,
     animationData: animation1,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
+
+  const lottie2Options = {
+    loop: true,
+    autoplay: true,
+    animationData: animation2,
     rendererSettings: {
       preserveAspectRatio: "xMidYMid slice",
     },
@@ -67,6 +78,44 @@ export default function MenuServicesPage() {
                       size="small"
                       color="primary"
                       href="/services/medico/consulta-medica"
+                    >
+                      Público
+                    </Button>
+                  </Col>
+                </Row>
+              </CardActions>
+            </CardActionArea>
+          </Card>
+        </Col>
+
+        <Col>
+          <Card sx={{ maxWidth: 345 }}>
+            <CardActionArea>
+              <Lottie options={lottie2Options} height={200} width={220} />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                  Consulta Psicológica
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Consulta psicológica a través de nuestra aplicación
+                </Typography>
+              </CardContent>
+              <CardActions>
+                <Row sm={12}>
+                  <Col className="text-center">
+                    <Button
+                      size="small"
+                      color="primary"
+                      href="/services/medico/consulta-psicologica"
+                    >
+                      Afiliados
+                    </Button>
+                  </Col>
+                  <Col className="text-right">
+                    <Button
+                      size="small"
+                      color="primary"
+                      href="/services/medico/consulta-psicologica"
                     >
                       Público
                     </Button>

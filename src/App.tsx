@@ -8,6 +8,7 @@ import DashboardPage from "./pages/Home/DashboardPage";
 import CotizacionPage from "./pages/Laboratory/CotizacionPage";
 import FormularioRecetaPage from "./pages/Services/Medico/FormularioRecetaPage";
 import MenuServicesPage from "./pages/Services/MenuServicesPage";
+import ConsulaPsicologica from "./pages/Services/Psicologo/Consula";
 
 const App: React.FC = () => {
   return (
@@ -25,7 +26,9 @@ const App: React.FC = () => {
         {/* SERVICES */}
         <Route path="/services" element={<MenuServicesPage />} />
         <Route path="/services/medico/consulta-medica" element={<FormularioRecetaPage />} />
-        
+
+        <Route path="/services/medico/consulta-psicologica" element={<ConsulaPsicologica />} />
+
 
         {/* PHARMACY */}
         <Route path="/pharmacy" element={<MenuServicesPage />} />
